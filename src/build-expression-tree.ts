@@ -6,8 +6,7 @@ export function buildExpressionTree(exp: string[]): TreeNode | null {
 
   for (const [i, v] of exp.entries()) {
     if (['+', '-', '*', '/'].includes(v)) {
-      const op = v as Operator;
-      const node = new TreeNode(op);
+      const node = new TreeNode(v as Operator);
       const right = nodes.pop();
       const left = nodes.pop();
 
