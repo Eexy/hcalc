@@ -1,4 +1,4 @@
-type Operator = '+' | '-' | '/' | '*';
+import { Operator } from "./types/Operator";
 
 const operatorsPrecedence = {
   '+': 0,
