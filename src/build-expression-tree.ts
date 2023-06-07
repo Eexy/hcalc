@@ -1,11 +1,15 @@
-import { TreeNode } from './expression-tree';
-import { Operator } from './types/Operator';
+import { TreeNode } from "./expression-tree";
+import { Operator } from "./types/Operator";
 
+/**
+ * @param {string[]} exp
+ * @return {TreeNode | null}
+ */
 export function buildExpressionTree(exp: string[]): TreeNode | null {
   const nodes = [] as TreeNode[];
 
   for (const [i, v] of exp.entries()) {
-    if (['+', '-', '*', '/'].includes(v)) {
+    if (["+", "-", "*", "/"].includes(v)) {
       const node = new TreeNode(v as Operator);
       const right = nodes.pop();
       const left = nodes.pop();
