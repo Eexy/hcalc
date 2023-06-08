@@ -4,3 +4,6 @@ dist
 # editors / IDE
 .vscode
 .idea
+
+# others
+history.txt
