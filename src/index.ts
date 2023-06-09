@@ -1,21 +1,26 @@
+import { readFileSync } from "fs";
 import { buildExpressionTree } from "./build-expression-tree";
 import { buildPostfix } from "./build-postfix";
 import { calc } from "./calc";
 import { isValidExpression } from "./is-valid-expression";
 import { saveInHistory } from "./save-in-history";
 
-const exp = process.argv[2];
-const params = process.argv.slice(3);
+const params = process.argv.slice(2);
 
-if (exp && isValidExpression(exp)) {
-  const postfix = buildPostfix(exp);
+if (params[0] && isValidExpression(params[0])) {
+  const postfix = buildPostfix(params[0]);
   const tree = buildExpressionTree(postfix);
   const val = calc(tree);
-  console.info(`${exp} = ${val}`);
+  console.info(`${params[0]} = ${val}`);
 
   if (params.includes("--save")) {
-    saveInHistory(`${exp} = ${val}`);
+    saveInHistory(`${params[0]} = ${val}`);
   }
+} else if (params[0] === "-log") {
+  const content = readFileSync("./history.txt", "utf-8");
+  console.info(content);
 } else {
-  console.info("Invalid expression passed");
+  console.error(
+    "Invalid params passed. You can see the list of options by using '-help' or '-h'"
+  );
 }
