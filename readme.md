@@ -6,6 +6,7 @@ hcalc is a small cli calc made with typescript
 
 - Calculate simple mathematical expression
 - Save previous results in history
+- Handle negative number
 
 ## What does it not do ?
 
@@ -15,5 +16,4 @@ hcalc is a small cli calc made with typescript
 ## Roadmap
 
 - [ ] Handle Parenthesis
-- [ ] Handle negative number
 - [ ] Implement mathematical function (ceil, floor, sqrt...)

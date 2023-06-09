@@ -6,10 +6,6 @@ describe("isValidExpression", () => {
     expect(isValidExpression("3+5")).toEqual(true);
   });
 
-  it("-3 => false", () => {
-    expect(isValidExpression("-3")).toEqual(false);
-  });
-
   it("+3/ => false", () => {
     expect(isValidExpression("+3/")).toEqual(false);
   });
@@ -20,5 +16,9 @@ describe("isValidExpression", () => {
 
   it("3+5/2-7* => false", () => {
     expect(isValidExpression("3+5/2-7*")).toEqual(false);
+  });
+
+  it("-3 => true", () => {
+    expect(isValidExpression("-3")).toEqual(true);
   });
 });

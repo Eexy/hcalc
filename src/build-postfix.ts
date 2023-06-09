@@ -20,8 +20,14 @@ export function buildPostfix(s: string): string[] {
   const operands = [] as string[];
   const operators = [] as Operator[];
 
+  let temp = s;
+
+  if (s[0] === "-" || s[0] === "+") {
+    temp = "0" + s;
+  }
+
   let prev = "";
-  for (const c of s) {
+  for (const c of temp) {
     if (["+", "/", "-", "*"].includes(c)) {
       /*
         When we find an operator we can insert the new operand because it's means we have completed it
