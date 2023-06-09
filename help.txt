@@ -1,0 +1,7 @@
+Here are all the command you can execute
+
+<mathematical expression> calculate the result
+  --save Save result in history.txt [optional]
+
+-log show history of previous operations
+  --clear clear history [optional]
