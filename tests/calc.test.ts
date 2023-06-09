@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { buildPostfix } from "./build-postfix";
-import { buildExpressionTree } from "./build-expression-tree";
-import { calc } from "./calc";
+import { buildPostfix } from "../src/build-postfix";
+import { buildExpressionTree } from "../src/build-expression-tree";
+import { calc } from "../src/calc";
 
 describe("calc", () => {
   it("3+5", () => {

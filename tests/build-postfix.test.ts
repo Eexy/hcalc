@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildPostfix } from "./build-postfix";
+import { buildPostfix } from "../src/build-postfix";
 
 describe("buildPostfix", () => {
   it("should return postfix expression", () => {

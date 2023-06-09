@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isValidExpression } from "./is-valid-expression";
+import { isValidExpression } from "../src/is-valid-expression";
 
 describe("isValidExpression", () => {
   it("3+5 => true", () => {
