@@ -2,12 +2,15 @@ import { appendFileSync } from "fs";
 
 /**
  * @param {string} val
+ * @param {string} file
  */
-export function saveInHistory(val: string): void {
+export function saveInHistory(val: string, file = "history.txt"): void {
   const content = `[${generateTimestampString()}] ${val}\n`;
 
+  console.info(file);
+
   try {
-    appendFileSync("./history.txt", content);
+    appendFileSync(`./${file}`, content);
   } catch {
     console.error("Unable to save in history");
   }
