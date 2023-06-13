@@ -3,7 +3,7 @@ import { buildPostfix } from "./build-postfix";
 import { calc } from "./calc";
 import { isValidExpression } from "./is-valid-expression";
 import { cli } from "./cli";
-import { saveInHistory } from "./save-in-history";
+import { saveInFile } from "./save-in-file";
 
 cli()
   .command(
@@ -24,7 +24,7 @@ cli()
       {
         param: "--save",
         description: "Save result in history",
-        handler: saveInHistory,
+        handler: saveInFile,
       },
     ]
   )

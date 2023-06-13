@@ -4,7 +4,7 @@ import { appendFileSync } from "fs";
  * @param {string} val
  * @param {string} file
  */
-export function saveInHistory(val: string, file = "history.txt"): void {
+export function saveInFile(val: string, file = "history.txt"): void {
   const content = `[${generateTimestampString()}] ${val}\n`;
 
   console.info(file);
