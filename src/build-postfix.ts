@@ -5,6 +5,8 @@ const operatorsPrecedence: Record<Operator, number> = {
   "-": 0,
   "*": 1,
   "/": 1,
+  "(": 2,
+  ")": 2,
 };
 
 /**
@@ -28,7 +30,7 @@ export function buildPostfix(s: string): string[] {
 
   let prev = "";
   for (const c of temp) {
-    if (["+", "/", "-", "*"].includes(c)) {
+    if (["+", "/", "-", "*", "(", ")"].includes(c)) {
       /*
         When we find an operator we can insert the new operand because it's means we have completed it
       */
@@ -40,19 +42,41 @@ export function buildPostfix(s: string): string[] {
       /*
         We chech if the new operator has a bigger precedence that the one on top of the stack
          - if it's bigger we put in on the stack
+         - else if the operator on top is '(' we put all operator in the operand stack
          - else we put all operators on the operand stack and put the new operator in a new empty stack
       */
       const newOperator = c as Operator;
       const newOperatorPrecedence = operatorsPrecedence[newOperator];
 
-      if (
-        operators[0] !== undefined &&
-        newOperatorPrecedence <= operatorsPrecedence[operators[0]]
-      ) {
-        operands.push(...operators);
-        operators.splice(0, operators.length, newOperator);
+      if (!operators.length) {
+        operators.push(newOperator);
+      } else if (newOperator === ")") {
+        let i = operators.length - 1;
+        while (i >= 0 && operators[i] !== "(") {
+          const op = operators.pop();
+
+          if (op) {
+            operands.push(op);
+          }
+
+          --i;
+        }
+
+        operators.pop();
       } else {
-        operators.unshift(newOperator);
+        const top = operators[operators.length - 1];
+        if (top) {
+          if (
+            (operatorsPrecedence[top] !== undefined &&
+              newOperatorPrecedence > operatorsPrecedence[top]) ||
+            top === "("
+          ) {
+            operators.push(newOperator);
+          } else {
+            operands.push(...operators.reverse());
+            operators.splice(0, operators.length, newOperator);
+          }
+        }
       }
     } else {
       prev += c;
@@ -64,7 +88,7 @@ export function buildPostfix(s: string): string[] {
     operands.push(prev);
   }
 
-  operands.push(...operators);
+  operands.push(...operators.reverse());
 
   return operands;
 }

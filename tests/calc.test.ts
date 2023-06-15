@@ -21,4 +21,16 @@ describe("calc", () => {
     const tree = buildExpressionTree(postfix);
     expect(calc(tree)).toBe(2);
   });
+
+  it("(3+5)/2", () => {
+    const postfix = buildPostfix("(3+5)/2");
+    const tree = buildExpressionTree(postfix);
+    expect(calc(tree)).toBe(4);
+  });
+
+  it("(3+5)/(2-1)", () => {
+    const postfix = buildPostfix("(3+5)/(2-1)");
+    const tree = buildExpressionTree(postfix);
+    expect(calc(tree)).toBe(8);
+  });
 });
