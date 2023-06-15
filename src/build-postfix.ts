@@ -40,10 +40,14 @@ export function buildPostfix(s: string): string[] {
       }
 
       /*
-        We chech if the new operator has a bigger precedence that the one on top of the stack
-         - if it's bigger we put in on the stack
-         - else if the operator on top is '(' we put all operator in the operand stack
-         - else we put all operators on the operand stack and put the new operator in a new empty stack
+        We check if the new operator has a bigger precedence that the one on top of the stack
+         - if the operator's stack is empty we put the new operator on top
+         - if the operator has a precedence < to the one on stock
+          - if the operator on top is a '(' we put the new operator on the stack
+          - else we put all operators in the stack in the operand's stack and we put the new operator on the new empty operator stack
+         - if the operator has a bigger precedence than the one on the top
+          - if the new operator is ')' we unroll all the operator in the stack and put them in the operand stack until we find the '('
+          - else we put the new operator on the stack 
       */
       const newOperator = c as MathSymbol;
       const newOperatorPrecedence = operatorsPrecedence[newOperator];
