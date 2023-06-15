@@ -76,7 +76,6 @@ export function buildPostfix(s: string): string[] {
             top === "("
           ) {
             operators.push(newOperator);
-            console.info({ updated: operators });
           } else {
             operands.push(...operators.reverse());
             operators.splice(0, operators.length, newOperator);
