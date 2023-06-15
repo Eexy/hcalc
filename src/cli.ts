@@ -101,8 +101,6 @@ export class CLI {
       this.parsedCommand = { command: commandName, value, params };
     }
 
-    console.info(this.parsedCommand);
-
     return this;
   }
 
