@@ -85,14 +85,14 @@ export class CLI {
         } else {
           commandName = v;
         }
+      } else if (i === 1) {
+        value = v;
       } else {
         if (/^-+/gi.test(v)) {
           const param = v.split(/=+/gi);
           if (param[0]) {
             params.push({ param: param[0], value: param[1] ?? undefined });
           }
-        } else {
-          value = v;
         }
       }
     }
