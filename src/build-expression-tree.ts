@@ -1,5 +1,5 @@
 import { TreeNode } from "./expression-tree";
-import { Operator } from "./types/Operator";
+import { Operator } from "./type";
 
 /**
  * @param {string[]} exp

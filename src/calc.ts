@@ -1,5 +1,5 @@
 import { TreeNode } from "./expression-tree";
-import { Operator } from "./types/Operator";
+import { Operator } from "./type";
 
 /**
  * @param {TreeNode | null} tree
@@ -7,7 +7,7 @@ import { Operator } from "./types/Operator";
  */
 export function calc(tree: TreeNode | null): number {
   if (tree == null) return 0;
-  /*  */
+
   if (typeof tree.value === "number") {
     return tree.value;
   }

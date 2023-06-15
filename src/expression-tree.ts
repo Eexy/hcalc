@@ -1,4 +1,4 @@
-import { Operator } from "./types/Operator";
+import { Operator } from "./type";
 
 /**
  * Represent a TreeNode

@@ -1,6 +1,6 @@
-import { Operator } from "./types/Operator";
+import { MathSymbol } from "./type";
 
-const operatorsPrecedence: Record<Operator, number> = {
+const operatorsPrecedence: Record<MathSymbol, number> = {
   "+": 0,
   "-": 0,
   "*": 1,
@@ -20,7 +20,7 @@ const operatorsPrecedence: Record<Operator, number> = {
  */
 export function buildPostfix(s: string): string[] {
   const operands = [] as string[];
-  const operators = [] as Operator[];
+  const operators = [] as MathSymbol[];
 
   let temp = s;
 
@@ -45,7 +45,7 @@ export function buildPostfix(s: string): string[] {
          - else if the operator on top is '(' we put all operator in the operand stack
          - else we put all operators on the operand stack and put the new operator in a new empty stack
       */
-      const newOperator = c as Operator;
+      const newOperator = c as MathSymbol;
       const newOperatorPrecedence = operatorsPrecedence[newOperator];
 
       if (!operators.length) {
@@ -72,6 +72,7 @@ export function buildPostfix(s: string): string[] {
             top === "("
           ) {
             operators.push(newOperator);
+            console.info({ updated: operators });
           } else {
             operands.push(...operators.reverse());
             operators.splice(0, operators.length, newOperator);
