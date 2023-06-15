@@ -7,8 +7,6 @@ import { appendFileSync } from "fs";
 export function saveInFile(val: string, file = "history.txt"): void {
   const content = `[${generateTimestampString()}] ${val}\n`;
 
-  console.info(file);
-
   try {
     appendFileSync(`./${file}`, content);
   } catch {

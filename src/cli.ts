@@ -117,8 +117,6 @@ export class CLI {
       if (command) {
         res = command.handler(this.parsedCommand.value);
 
-        console.info(res);
-
         for (const param of this.parsedCommand.params) {
           const paramHandler = command.params[param.param];
 
@@ -152,6 +150,12 @@ export class CLI {
     return this.command("help", "Show help", () => {
       for (const [command, option] of Object.entries(this.commands)) {
         console.info(`${command}\t${option.description}`);
+
+        if (option.params) {
+          for (const [param, paramOption] of Object.entries(option.params)) {
+            console.info(`\t${param}\t${paramOption.description}`);
+          }
+        }
       }
     });
   }
