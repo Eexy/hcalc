@@ -10,6 +10,12 @@ describe("calc", () => {
     expect(calc(tree)).toBe(8);
   });
 
+  it("3", () => {
+    const postfix = buildPostfix("3");
+    const tree = buildExpressionTree(postfix);
+    expect(calc(tree)).toBe(3);
+  })
+
   it("3+5/2-10", () => {
     const postfix = buildPostfix("3+5/2-10");
     const tree = buildExpressionTree(postfix);

@@ -4,17 +4,20 @@ import { calc } from "./calc";
 import { isValidExpression } from "./is-valid-expression";
 import { cli } from "./cli";
 import { saveInFile } from "./save-in-file";
+import { replaceNegative } from "./replace-negative";
 
 cli()
   .command(
     "calc",
     "Eval a mathematical expression",
     (val: string) => {
-      if (!isValidExpression(val)) {
+      const exp = replaceNegative(val);
+
+      if (!isValidExpression(exp)) {
         return console.error("Invalid mathematical expresion");
       }
 
-      const postfix = buildPostfix(val);
+      const postfix = buildPostfix(exp);
       const tree = buildExpressionTree(postfix);
       const res = calc(tree);
       console.info(`${val} = ${res}`);
