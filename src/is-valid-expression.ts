@@ -3,7 +3,8 @@
  * @return {boolean}
  */
 export function isValidExpression(s: string): boolean {
-  const operands = [] as string[];
+  const operands: string[] = [];
+  const parenthesis: string[] = [];
   let temp = s;
 
   if (s[0] === "-" || s[0] === "+") {
@@ -12,15 +13,22 @@ export function isValidExpression(s: string): boolean {
 
   let prev = "";
   for (const c of temp) {
-    if (["+", "-", "*", "/"].includes(c)) {
+    if (["+", "-", "*", "/", "(", ")"].includes(c)) {
       if (prev.length) {
         operands.push(prev);
         prev = "";
       }
 
-      const top = operands.pop();
+      if (c === "(") {
+        parenthesis.push("(");
+      } else if (c === ")") {
+        const last = parenthesis.pop();
 
-      if (!top) return false;
+        if (!last) return false;
+      } else {
+        const top = operands.pop();
+        if (!top) return false;
+      }
     } else {
       prev += c;
     }
