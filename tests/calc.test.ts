@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { buildPostfix } from "../src/build-postfix";
 import { buildExpressionTree } from "../src/build-expression-tree";
 import { calc } from "../src/calc";
+import { replaceEmptySign } from "../src/replace-empty-sign";
 
 describe("calc", () => {
   it("3+5", () => {
@@ -11,10 +12,10 @@ describe("calc", () => {
   });
 
   it("3", () => {
-    const postfix = buildPostfix("3");
+    const postfix = buildPostfix(replaceEmptySign("3"));
     const tree = buildExpressionTree(postfix);
     expect(calc(tree)).toBe(3);
-  })
+  });
 
   it("3+5/2-10", () => {
     const postfix = buildPostfix("3+5/2-10");

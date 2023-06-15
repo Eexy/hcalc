@@ -5,13 +5,14 @@ import { isValidExpression } from "./is-valid-expression";
 import { cli } from "./cli";
 import { saveInFile } from "./save-in-file";
 import { replaceNegative } from "./replace-negative";
+import { replaceEmptySign } from "./replace-empty-sign";
 
 cli()
   .command(
     "calc",
     "Eval a mathematical expression",
     (val: string) => {
-      const exp = replaceNegative(val);
+      const exp = replaceEmptySign(replaceNegative(val));
 
       if (!isValidExpression(exp)) {
         return console.error("Invalid mathematical expresion");
