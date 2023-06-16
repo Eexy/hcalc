@@ -32,7 +32,7 @@ cli()
       },
     ]
   )
-  .version(1.5)
+  .version(2.0)
   .help()
   .parse()
   .execute();
