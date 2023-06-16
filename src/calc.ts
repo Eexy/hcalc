@@ -6,6 +6,7 @@ import { Operator } from "./type";
  * @return {number}
  */
 export function calc(tree: TreeNode | null): number {
+    
   if (tree == null) return 0;
 
   if (typeof tree.value === "number") {
@@ -20,4 +21,9 @@ const operatorsFunctions: Record<Operator, (a: number, b: number) => number> = {
   "-": (a: number, b: number) => a - b,
   "/": (a: number, b: number) => a / b,
   "*": (a: number, b: number) => a * b,
+  "^": (a: number, b: number) => {
+    if (b === 0) return 1;
+
+    return Math.pow(a, b);
+  },
 };

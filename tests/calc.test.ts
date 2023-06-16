@@ -11,10 +11,22 @@ describe("calc", () => {
     expect(calc(tree)).toBe(8);
   });
 
+  it("3+(5^2)", () => {
+    const postfix = buildPostfix("3+(5^2)");
+    const tree = buildExpressionTree(postfix);
+    expect(calc(tree)).toBe(28);
+  });
+
   it("3", () => {
     const postfix = buildPostfix(replaceEmptySign("3"));
     const tree = buildExpressionTree(postfix);
     expect(calc(tree)).toBe(3);
+  });
+
+  it("3^0-1", () => {
+    const postfix = buildPostfix(replaceEmptySign("3^0-1"));
+    const tree = buildExpressionTree(postfix);
+    expect(calc(tree)).toBe(0);
   });
 
   it("3+5/2-10", () => {

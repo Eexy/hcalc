@@ -7,6 +7,7 @@ const operatorsPrecedence: Record<MathSymbol, number> = {
   "/": 1,
   "(": 2,
   ")": 2,
+  "^": 3,
 };
 
 /**
@@ -30,7 +31,7 @@ export function buildPostfix(s: string): string[] {
 
   let prev = "";
   for (const c of temp) {
-    if (["+", "/", "-", "*", "(", ")"].includes(c)) {
+    if (["+", "/", "-", "*", "(", ")", "^"].includes(c)) {
       /*
         When we find an operator we can insert the new operand because it's means we have completed it
       */
