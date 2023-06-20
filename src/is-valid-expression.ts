@@ -43,7 +43,5 @@ export function isValidExpression(exp: string): boolean {
     operands.push(prev);
   }
 
-  operands.pop();
-
-  return operands.length === 0;
+  return !!operands.length;
 }
