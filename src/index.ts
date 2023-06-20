@@ -2,17 +2,27 @@ import { buildExpressionTree } from "./build-expression-tree";
 import { buildPostfix } from "./build-postfix";
 import { calc } from "./calc";
 import { isValidExpression } from "./is-valid-expression";
-import { cli } from "./cli";
-import { saveInFile } from "./save-in-file";
 import { replaceNegative } from "./replace-negative";
 import { replaceEmptySign } from "./replace-empty-sign";
+import yargs from "yargs";
 
-cli()
+yargs
+  .scriptName("hcalc")
+  .usage("$0 <cmd> [args]")
   .command(
-    "calc",
-    "Eval a mathematical expression",
-    (val: string) => {
-      const exp = replaceEmptySign(replaceNegative(val));
+    "calc [exp]",
+    "Evaluate a mathematical expression",
+    (yargs) => {
+      yargs.positional("exp", {
+        type: "string",
+        default: "0",
+        describe: "The expression to evaluate",
+      });
+    },
+    function (argv: any) {
+      console.info("here");
+
+      const exp = replaceEmptySign(replaceNegative(argv.exp));
 
       if (!isValidExpression(exp)) {
         return console.error("Invalid mathematical expresion");
@@ -21,18 +31,7 @@ cli()
       const postfix = buildPostfix(exp);
       const tree = buildExpressionTree(postfix);
       const res = calc(tree);
-      console.info(`${val} = ${res}`);
-      return res;
-    },
-    [
-      {
-        param: "--save",
-        description: "Save result in history",
-        handler: saveInFile,
-      },
-    ]
+      console.info(`${argv.exp} = ${res}`);
+    }
   )
-  .version(2.0)
-  .help()
-  .parse()
-  .execute();
+  .help().argv;
