@@ -1,18 +1,23 @@
 /**
- * @param {string} s
+ * Check if a string a valid mathematical expression
+ *
+ * @example
+ * //return true
+ * isValidExpression("3")
+ *
+ * @example
+ * // return false
+ * isValidExpression("/2")
+ *
+ * @param {string} exp
  * @return {boolean}
  */
-export function isValidExpression(s: string): boolean {
+export function isValidExpression(exp: string): boolean {
   const operands: string[] = [];
   const parenthesis: string[] = [];
-  let temp = s;
-
-  if (s[0] === "-" || s[0] === "+") {
-    temp = "0" + s;
-  }
 
   let prev = "";
-  for (const c of temp) {
+  for (const c of exp) {
     if (["+", "-", "*", "/", "(", ")"].includes(c)) {
       if (prev.length) {
         operands.push(prev);
@@ -38,5 +43,7 @@ export function isValidExpression(s: string): boolean {
     operands.push(prev);
   }
 
-  return operands.length === 1;
+  operands.pop();
+
+  return operands.length === 0;
 }

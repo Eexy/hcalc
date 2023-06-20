@@ -1,29 +1,22 @@
-import { TreeNode } from "./expression-tree";
-import { Operator } from "./type";
+import { buildExpressionTree } from "./build-expression-tree";
+import { buildPostfix } from "./build-postfix";
+import { evalTree } from "./eval-tree";
+import { replaceNegativeSign } from "./replace-negative-sign";
+import { isValidExpression } from "./is-valid-expression";
 
 /**
- * @param {TreeNode | null} tree
+ * Evaluate a mathematical expression
+ * @param {string} exp - A mathematical expression
  * @return {number}
  */
-export function calc(tree: TreeNode | null): number {
-    
-  if (tree == null) return 0;
+export function calc(exp: string): number {
+  const formatedExpression = replaceNegativeSign(exp);
 
-  if (typeof tree.value === "number") {
-    return tree.value;
+  if (!isValidExpression(formatedExpression)) {
+    throw new Error("Invalid mathematical expression");
   }
 
-  return operatorsFunctions[tree.value](calc(tree.left), calc(tree.right));
+  const postfix = buildPostfix(formatedExpression);
+  const tree = buildExpressionTree(postfix);
+  return evalTree(tree);
 }
-
-const operatorsFunctions: Record<Operator, (a: number, b: number) => number> = {
-  "+": (a: number, b: number) => a + b,
-  "-": (a: number, b: number) => a - b,
-  "/": (a: number, b: number) => a / b,
-  "*": (a: number, b: number) => a * b,
-  "^": (a: number, b: number) => {
-    if (b === 0) return 1;
-
-    return Math.pow(a, b);
-  },
-};

@@ -19,7 +19,7 @@ describe("isValidExpression", () => {
   });
 
   it("-3 => true", () => {
-    expect(isValidExpression("-3")).toEqual(true);
+    expect(isValidExpression("-3")).toEqual(false);
   });
 
   it("(3+5)", () => {
