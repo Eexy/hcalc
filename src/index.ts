@@ -63,4 +63,4 @@ yargs
       }
     }
   )
-  .help().version("2.0.0").argv;
+  .help().version("2.5.0").argv;
